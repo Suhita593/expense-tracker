@@ -4,7 +4,7 @@ import sqlite3
 
 #this function initializes the database and creates the expenses table if it does not exists
 
-def db_init():
+def init_db():
     conn = sqlite3.connect("expenses.db")
 #the above code opens a connection to the SQLite database file named "expenses.db". If the file does not exist, it will be created. conn is like a bridge between your python code and and database file.
     cursor = conn.cursor()
@@ -43,3 +43,4 @@ def get_expenses() :
     cursor.execute("SELECT * FROM expenses")
     rows = cursor.fetchall()
     conn.close()
+    return rows

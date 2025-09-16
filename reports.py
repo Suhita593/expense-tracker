@@ -1,18 +1,20 @@
 
-#Helps us talk to the expenses database
 import sqlite3
 
-#plt - drawing tool in python, used here to make a pie chart
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
 
 def category_report():
     conn = sqlite3.connect('expenses.db')
 
-    #cursor is like a pen that helps you read/write inside a database
+    
     cursor = conn.cursor()
 
     cursor.execute("SELECT category, SUM(amount) FROM expenses GROUP BY category")
     data = cursor.fetchall()
+
+    print(data)
 
     conn.close()
 
@@ -24,3 +26,6 @@ def category_report():
     plt.pie(amounts, labels= categories, autopct= '%1.1f%%')
     plt.title("Expenses by Category")
     plt.show()
+
+if __name__ == "__main__":
+    category_report()
